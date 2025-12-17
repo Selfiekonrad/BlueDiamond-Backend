@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres
+    container_name: blue_diamond_db
+    environment:
+      - POSTGRES_USER=blue
+      - POSTGRES_PASSWORD=diamond
+      - POSTGRES_DB=blue_diamond_db
+    networks:
+      - blue_diamond_network
+    ports:
+      - "5432:5432"
+
+networks:
+  blue_diamond_network:
+    driver: bridge
