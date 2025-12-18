@@ -1,7 +1,7 @@
 package com.ceniuch.bluediamondbackend.users;
 
 import com.ceniuch.bluediamondbackend.users.dtos.CreateUserDto;
-import com.ceniuch.bluediamondbackend.users.dtos.GetUserDtoId;
+import com.ceniuch.bluediamondbackend.users.dtos.GetUserDtoUid;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class UserController {
     )
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    GetUserDtoId createUser(@RequestBody CreateUserDto createUserDto) {
+    GetUserDtoUid createUser(@RequestBody CreateUserDto createUserDto) {
         return userService.createUser(createUserDto);
     }
 

@@ -1,7 +1,7 @@
 package com.ceniuch.bluediamondbackend.users.dtos;
 
-public record GetUserDtoId(
-    Long id,
+public record GetUserDtoUid(
+    String UID,
     String username
 ) {
 }

@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 @Table(name = "blueuser")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String UID;
 
     @Column(name = "username")
     private String username;
@@ -14,21 +13,13 @@ public class User {
     public User() {
     }
 
-    public User(String username) {
+    public User(String UID, String username) {
+        this.UID = UID;
         this.username = username;
     }
 
-    public User(Long id, String username) {
-        this.id = id;
-        this.username = username;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public String getUID() {
+        return UID;
     }
 
     public String getUsername() {
@@ -42,7 +33,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "UID=" + UID +
                 ", username='" + username + '\'' +
                 '}';
     }

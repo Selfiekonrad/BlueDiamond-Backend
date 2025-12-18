@@ -1,4 +1,4 @@
 package com.ceniuch.bluediamondbackend.users.dtos;
 
-public record CreateUserDto(String username) {
+public record CreateUserDto(String UID, String username) {
 }

@@ -5,7 +5,7 @@ import com.ceniuch.bluediamondbackend.users.dtos.CreateUserDto;
 
 public class CreateUserDtoMapper {
     public static User fromCreateUserDto(CreateUserDto createUserDto) {
-        return new User(createUserDto.username());
+        return new User(createUserDto.UID(), createUserDto.username());
     }
 
     private CreateUserDtoMapper() {
