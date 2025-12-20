@@ -17,4 +17,13 @@ public class SubjectExceptionControllerAdvice {
         );
         return new ResponseEntity<>(errorMessageModel, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    ResponseEntity<ErrorMessageModel> handleSubjectExistsException(SubjectExistsException exception) {
+        ErrorMessageModel errorMessageModel = new ErrorMessageModel(
+                HttpStatus.CONFLICT.value(),
+                exception.getMessage()
+        );
+        return new ResponseEntity<>(errorMessageModel, HttpStatus.CONFLICT);
+    }
 }

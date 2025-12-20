@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(
     name = "Subject Controller",
     description = "Controller for CRUD operations on the subject"
@@ -29,5 +31,14 @@ public class SubjectController {
     @ResponseStatus(HttpStatus.CREATED)
     GetSubjectDto createSubject(@RequestBody CreateSubjectDto createSubjectDto) {
         return subjectService.createSubjectDto(createSubjectDto);
+    }
+
+    @Operation(
+            summary = "Get all Subjects for a given user UID."
+    )
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    List<GetSubjectDto> getAllSubjects(@RequestParam String userUid) {
+        return subjectService.getAllUserSubjects(userUid);
     }
 }
