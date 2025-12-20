@@ -6,9 +6,11 @@ import com.ceniuch.bluediamondbackend.subjects.dtos.GetSubjectDto;
 public class GetSubjectDtoMapper {
     public static GetSubjectDto toGetSubjectDto(Subject subject) {
         return new GetSubjectDto(
+                subject.getSubjectId(),
                 subject.getName()
         );
     }
 
-    private GetSubjectDtoMapper() {}
+    private GetSubjectDtoMapper() {
+    }
 }

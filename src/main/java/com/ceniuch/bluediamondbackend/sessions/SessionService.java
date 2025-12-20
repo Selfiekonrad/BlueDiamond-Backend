@@ -2,6 +2,7 @@ package com.ceniuch.bluediamondbackend.sessions;
 
 import com.ceniuch.bluediamondbackend.sessions.dtos.CreateSessionDto;
 import com.ceniuch.bluediamondbackend.sessions.dtos.GetSessionDto;
+import com.ceniuch.bluediamondbackend.sessions.mappers.GetSessionDtoMapper;
 import com.ceniuch.bluediamondbackend.subjects.Subject;
 import com.ceniuch.bluediamondbackend.subjects.SubjectRepository;
 import com.ceniuch.bluediamondbackend.subjects.exceptions.SubjectNotFoundException;
@@ -10,6 +11,8 @@ import com.ceniuch.bluediamondbackend.users.UserRepository;
 import com.ceniuch.bluediamondbackend.users.exceptions.UserNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static com.ceniuch.bluediamondbackend.sessions.mappers.CreateSessionDtoMapper.fromCreateSessionDto;
 import static com.ceniuch.bluediamondbackend.sessions.mappers.GetSessionDtoMapper.toGetSessionDto;
@@ -37,5 +40,10 @@ public class SessionService {
         Session newSession = fromCreateSessionDto(createSessionDto, targetUser, targetSubject);
         Session savedSession = sessionRepository.save(newSession);
         return toGetSessionDto(savedSession);
+    }
+
+    List<GetSessionDto> getAllSessions(String userUid) {
+        List<Session> sessions = sessionRepository.findAllByUser_UID(userUid);
+        return sessions.stream().map(GetSessionDtoMapper::toGetSessionDto).toList();
     }
 }

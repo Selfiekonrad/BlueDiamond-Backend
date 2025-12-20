@@ -2,10 +2,13 @@ package com.ceniuch.bluediamondbackend.sessions;
 
 import com.ceniuch.bluediamondbackend.sessions.dtos.CreateSessionDto;
 import com.ceniuch.bluediamondbackend.sessions.dtos.GetSessionDto;
+import com.ceniuch.bluediamondbackend.sessions.dtos.GetSessionDtoId;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(
     name = "Session Controller",
@@ -27,5 +30,14 @@ public class SessionController{
     @ResponseStatus(HttpStatus.CREATED)
     GetSessionDto createSession(@RequestBody CreateSessionDto createSessionDto) {
         return sessionService.createSession(createSessionDto);
+    }
+
+    @Operation(
+            summary = "Get all Sessions for a given userUid."
+    )
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    List<GetSessionDto> getAllSessions(@RequestParam String userUid) {
+        return sessionService.getAllSessions(userUid);
     }
 }

@@ -1,4 +1,5 @@
 package com.ceniuch.bluediamondbackend.users;
+import com.ceniuch.bluediamondbackend.sessions.Session;
 import com.ceniuch.bluediamondbackend.subjects.Subject;
 import jakarta.persistence.*;
 
@@ -21,6 +22,12 @@ public class User {
             fetch = FetchType.EAGER
     )
     private List<Subject> subjects = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.REMOVE
+    )
+    private List<Session> sessions = new ArrayList<>();
 
     public User() {
     }
