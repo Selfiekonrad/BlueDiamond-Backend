@@ -28,5 +28,4 @@ public class UserController {
     GetUserDtoUid createUser(@RequestBody CreateUserDto createUserDto) {
         return userService.createUser(createUserDto);
     }
-
 }

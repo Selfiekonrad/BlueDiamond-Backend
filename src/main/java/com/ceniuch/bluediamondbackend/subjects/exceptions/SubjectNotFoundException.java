@@ -1,0 +1,7 @@
+package com.ceniuch.bluediamondbackend.subjects.exceptions;
+
+public class SubjectNotFoundException extends RuntimeException {
+    public SubjectNotFoundException(String message) {
+        super(message);
+    }
+}
