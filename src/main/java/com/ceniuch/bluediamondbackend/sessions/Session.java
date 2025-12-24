@@ -26,6 +26,9 @@ public class Session {
     @Column(name = "date")
     private LocalDateTime date;
 
+    @Column(name = "start_time")
+    private LocalDateTime startTime;
+
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "user_uid")
@@ -68,5 +71,13 @@ public class Session {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 }

@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 )
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class UserController {
     private final UserService userService;
 
