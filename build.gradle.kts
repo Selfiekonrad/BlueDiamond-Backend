@@ -29,10 +29,10 @@ dependencies {
 }
 
 tasks.register("stage") {
-    dependsOn("build", "clean")
+    dependsOn("clean", "assemble")
 }
 
-tasks.named("build") {
+tasks.named("assemble") {
     mustRunAfter("clean")
 }
 
