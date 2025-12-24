@@ -28,6 +28,14 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+tasks.register("stage") {
+    dependsOn("build", "clean")
+}
+
+tasks.named("build") {
+    mustRunAfter("clean")
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
