@@ -6,14 +6,13 @@ import com.ceniuch.bluediamondbackend.subjects.Subject;
 import com.ceniuch.bluediamondbackend.users.User;
 
 public class CreateSessionDtoMapper {
-
     public static Session fromCreateSessionDto(CreateSessionDto createSessionDto,
                                                User targetUser,
                                                Subject targetSubject) {
         return new Session(
             targetSubject,
             createSessionDto.duration(),
-            createSessionDto.date(),
+            createSessionDto.startTime(),
             targetUser
         );
     }

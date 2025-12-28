@@ -1,12 +1,12 @@
 package com.ceniuch.bluediamondbackend.sessions.dtos;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public record CreateSessionDto(
     String userUid,
     String subjectId,
-    Duration duration,
-    LocalDateTime date
+    LocalTime startTime,
+    Duration duration
 ) {
 }

@@ -2,6 +2,8 @@ package com.ceniuch.bluediamondbackend.sessions;
 
 import com.ceniuch.bluediamondbackend.sessions.dtos.CreateSessionDto;
 import com.ceniuch.bluediamondbackend.sessions.dtos.GetSessionDto;
+import com.ceniuch.bluediamondbackend.sessions.dtos.UpdateSessionDtoId;
+import com.ceniuch.bluediamondbackend.sessions.exceptions.SessionNotFoundException;
 import com.ceniuch.bluediamondbackend.sessions.mappers.GetSessionDtoMapper;
 import com.ceniuch.bluediamondbackend.subjects.Subject;
 import com.ceniuch.bluediamondbackend.subjects.SubjectRepository;
@@ -52,5 +54,19 @@ public class SessionService {
                 .sorted(Comparator.reverseOrder())
                 .map(GetSessionDtoMapper::toGetSessionDto)
                 .toList();
+    }
+
+    @Transactional
+    GetSessionDto updateSession(UpdateSessionDtoId updateSessionDtoId) {
+        if ( updateSessionDtoId.sessionId() == null) {
+            throw new IllegalArgumentException("Session ID must not be null.");
+        }
+
+        Session targetSession = sessionRepository.findBySessionId(updateSessionDtoId.sessionId()).orElseThrow(
+                () -> new SessionNotFoundException("Session with ID " + updateSessionDtoId.sessionId() + " not found.")
+        );
+
+        targetSession.setCompleted(updateSessionDtoId.completed());
+        return toGetSessionDto(sessionRepository.save(targetSession));
     }
 }

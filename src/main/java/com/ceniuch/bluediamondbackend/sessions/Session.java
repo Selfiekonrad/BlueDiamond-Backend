@@ -4,8 +4,10 @@ import com.ceniuch.bluediamondbackend.subjects.Subject;
 import com.ceniuch.bluediamondbackend.users.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 // TODO: Make shared Sessions
 @Entity(name = "session")
@@ -27,17 +29,21 @@ public class Session implements Comparable<Session> {
     private LocalDateTime date;
 
     @Column(name = "start_time")
-    private LocalDateTime startTime;
+    private LocalTime startTime;
+
+    @Column(name = "completed")
+    private boolean completed = false;
 
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "user_uid")
     User user;
 
-    public Session(Subject subject, Duration duration, LocalDateTime date, User user) {
+    public Session(Subject subject, Duration duration, LocalTime startTime, User user) {
         this.subject = subject;
         this.duration = duration;
-        this.date = date;
+        this.startTime = startTime;
+        this.date = LocalDateTime.now();
         this.user = user;
     }
 
@@ -57,6 +63,14 @@ public class Session implements Comparable<Session> {
         return user;
     }
 
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
     public Duration getDuration() {
         return duration;
     }
@@ -73,11 +87,11 @@ public class Session implements Comparable<Session> {
         this.date = date;
     }
 
-    public LocalDateTime getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
