@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 // TODO: Make shared Sessions
 @Entity(name = "session")
 @Table(name = "session")
-public class Session {
+public class Session implements Comparable<Session> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String sessionId;
@@ -79,5 +79,14 @@ public class Session {
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+    }
+
+    @Override
+    public int compareTo(Session o) {
+        if (this.date == null && o.getDate() == null) return 0;
+        if (this.date == null) return -1;
+        if (o.getDate() == null) return 1;
+
+        return this.date.compareTo(o.getDate());
     }
 }

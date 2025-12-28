@@ -13,6 +13,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.TreeMap;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import static com.ceniuch.bluediamondbackend.sessions.mappers.CreateSessionDtoMapper.fromCreateSessionDto;
 import static com.ceniuch.bluediamondbackend.sessions.mappers.GetSessionDtoMapper.toGetSessionDto;
@@ -44,6 +47,9 @@ public class SessionService {
 
     List<GetSessionDto> getAllSessions(String userUid) {
         List<Session> sessions = sessionRepository.findAllByUser_UID(userUid);
-        return sessions.stream().map(GetSessionDtoMapper::toGetSessionDto).toList();
+        return sessions.stream()
+                .sorted()
+                .map(GetSessionDtoMapper::toGetSessionDto)
+                .toList();
     }
 }
