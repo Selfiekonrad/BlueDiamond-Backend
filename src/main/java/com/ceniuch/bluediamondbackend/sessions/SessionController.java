@@ -14,6 +14,7 @@ import java.util.List;
     name = "Session Controller",
     description = "Controller for CRUD operations on the session"
 )
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/sessions")
 public class SessionController{
