@@ -12,6 +12,7 @@ import com.ceniuch.bluediamondbackend.users.exceptions.UserNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collector;
@@ -48,7 +49,7 @@ public class SessionService {
     List<GetSessionDto> getAllSessions(String userUid) {
         List<Session> sessions = sessionRepository.findAllByUser_UID(userUid);
         return sessions.stream()
-                .sorted()
+                .sorted(Comparator.reverseOrder())
                 .map(GetSessionDtoMapper::toGetSessionDto)
                 .toList();
     }
