@@ -1,7 +1,5 @@
 package com.ceniuch.bluediamondbackend.subjects;
 
-import com.ceniuch.bluediamondbackend.sessions.dtos.CreateSessionDto;
-import com.ceniuch.bluediamondbackend.sessions.dtos.GetSessionDto;
 import com.ceniuch.bluediamondbackend.subjects.dtos.CreateSubjectDto;
 import com.ceniuch.bluediamondbackend.subjects.dtos.GetSubjectDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +14,7 @@ import java.util.List;
     description = "Controller for CRUD operations on the subject"
 )
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/subjects")
 public class SubjectController {
     private final SubjectService subjectService;
