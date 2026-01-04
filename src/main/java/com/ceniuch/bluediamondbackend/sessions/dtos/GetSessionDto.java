@@ -10,7 +10,7 @@ public record GetSessionDto(
     String sessionId,
     GetSubjectDto subject,
     Duration duration,
-    LocalDateTime date,
+    LocalDateTime startedAt,
     Boolean completed,
     GetUserDto user
 ) {

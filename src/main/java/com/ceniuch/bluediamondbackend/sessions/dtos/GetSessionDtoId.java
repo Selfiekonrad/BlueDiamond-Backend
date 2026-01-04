@@ -8,8 +8,7 @@ public record GetSessionDtoId(
     String sessionId,
     String subjectId,
     Duration duration,
-    LocalDateTime date,
-    LocalTime startTime,
+    LocalDateTime startedAt,
     Boolean completed,
     String userId
 ) {
