@@ -12,7 +12,7 @@ public class CreateSessionDtoMapper {
         return new Session(
             targetSubject,
             createSessionDto.duration(),
-            createSessionDto.startTime(),
+            createSessionDto.startedAt(),
             targetUser
         );
     }

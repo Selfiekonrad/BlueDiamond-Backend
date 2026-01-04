@@ -25,11 +25,8 @@ public class Session implements Comparable<Session> {
     @Column(name = "duration")
     private Duration duration;
 
-    @Column(name = "date")
-    private LocalDateTime date;
-
-    @Column(name = "start_time")
-    private LocalTime startTime;
+    @Column(name = "started_at")
+    private LocalDateTime startedAt;
 
     @Column(name = "completed")
     private boolean completed = false;
@@ -39,11 +36,10 @@ public class Session implements Comparable<Session> {
     @JoinColumn(name = "user_uid")
     User user;
 
-    public Session(Subject subject, Duration duration, LocalTime startTime, User user) {
+    public Session(Subject subject, Duration duration, LocalDateTime startedAt, User user) {
         this.subject = subject;
         this.duration = duration;
-        this.startTime = startTime;
-        this.date = LocalDateTime.now();
+        this.startedAt = startedAt;
         this.user = user;
     }
 
@@ -79,28 +75,20 @@ public class Session implements Comparable<Session> {
         this.duration = duration;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getStartedAt() {
+        return startedAt;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    public void setStartedAt(LocalDateTime date) {
+        this.startedAt = date;
     }
 
     @Override
     public int compareTo(Session o) {
-        if (this.date == null && o.getDate() == null) return 0;
-        if (this.date == null) return -1;
-        if (o.getDate() == null) return 1;
+        if (this.startedAt == null && o.getStartedAt() == null) return 0;
+        if (this.startedAt == null) return -1;
+        if (o.getStartedAt() == null) return 1;
 
-        return this.date.compareTo(o.getDate());
+        return this.startedAt.compareTo(o.getStartedAt());
     }
 }
