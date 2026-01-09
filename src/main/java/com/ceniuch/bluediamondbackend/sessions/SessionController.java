@@ -2,8 +2,6 @@ package com.ceniuch.bluediamondbackend.sessions;
 
 import com.ceniuch.bluediamondbackend.sessions.dtos.CreateSessionDto;
 import com.ceniuch.bluediamondbackend.sessions.dtos.GetSessionDto;
-import com.ceniuch.bluediamondbackend.sessions.dtos.GetSessionDtoId;
-import com.ceniuch.bluediamondbackend.sessions.dtos.UpdateSessionDtoId;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -41,16 +39,5 @@ public class SessionController{
     @ResponseStatus(HttpStatus.OK)
     List<GetSessionDto> getAllSessions(@RequestParam String userUid) {
         return sessionService.getAllSessions(userUid);
-    }
-
-    @Operation(
-            summary = "Update an existing Session according to a provided GetSessionDtoId." +
-                    "Only used for updating the completed status of the Session." +
-                    "If the Session with the provided sessionId does not exist, a SessionNotFoundException is thrown."
-    )
-    @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    GetSessionDto updateSession(@RequestBody UpdateSessionDtoId updateSessionDtoId) {
-        return sessionService.updateSession(updateSessionDtoId);
     }
 }

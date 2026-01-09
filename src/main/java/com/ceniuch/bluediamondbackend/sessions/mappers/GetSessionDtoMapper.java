@@ -13,7 +13,6 @@ public class GetSessionDtoMapper {
             toGetSubjectDto(session.getSubject()),
             session.getDuration(),
             session.getStartedAt(),
-            session.isCompleted(),
             toGetUserDtoId(session.getUser())
         );
     }

@@ -11,7 +11,6 @@ public record GetSessionDto(
     GetSubjectDto subject,
     Duration duration,
     LocalDateTime startedAt,
-    Boolean completed,
     GetUserDto user
 ) {
 }

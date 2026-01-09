@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 // TODO: Make shared Sessions
 @Entity(name = "session")
@@ -27,9 +26,6 @@ public class Session implements Comparable<Session> {
 
     @Column(name = "started_at")
     private LocalDateTime startedAt;
-
-    @Column(name = "completed")
-    private boolean completed = false;
 
     @ManyToOne
     @JsonBackReference
@@ -57,14 +53,6 @@ public class Session implements Comparable<Session> {
 
     public User getUser() {
         return user;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
     }
 
     public Duration getDuration() {
