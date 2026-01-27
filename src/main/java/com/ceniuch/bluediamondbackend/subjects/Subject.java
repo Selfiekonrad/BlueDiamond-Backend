@@ -51,5 +51,9 @@ public class Subject {
     public String getSubjectId() {
         return subjectId;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 

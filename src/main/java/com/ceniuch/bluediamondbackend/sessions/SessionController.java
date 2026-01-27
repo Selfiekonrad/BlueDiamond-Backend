@@ -40,4 +40,15 @@ public class SessionController{
     List<GetSessionDto> getAllSessions(@RequestParam String userUid) {
         return sessionService.getAllSessions(userUid);
     }
+
+    @Operation(
+            summary = "Delete an existing session." +
+            "The session to be deleted is chosen by the provided id. " +
+            "If the session doesn't exist, this operation will fail."
+    )
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteSession(@PathVariable("id") String sessionId) {
+        sessionService.deleteSession(sessionId);
+    }
 }

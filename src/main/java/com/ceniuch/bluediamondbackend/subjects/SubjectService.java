@@ -2,7 +2,9 @@ package com.ceniuch.bluediamondbackend.subjects;
 
 import com.ceniuch.bluediamondbackend.subjects.dtos.CreateSubjectDto;
 import com.ceniuch.bluediamondbackend.subjects.dtos.GetSubjectDto;
+import com.ceniuch.bluediamondbackend.subjects.dtos.UpdateSubjectDto;
 import com.ceniuch.bluediamondbackend.subjects.exceptions.SubjectExistsException;
+import com.ceniuch.bluediamondbackend.subjects.exceptions.SubjectNotFoundException;
 import com.ceniuch.bluediamondbackend.subjects.mappers.CreateSubjectDtoMapper;
 import com.ceniuch.bluediamondbackend.subjects.mappers.GetSubjectDtoMapper;
 import com.ceniuch.bluediamondbackend.users.User;
@@ -47,5 +49,22 @@ public class SubjectService {
                 () -> new UserNotFoundException("User with UID " + userUid + " not found.")
         );
         return subjectRepository.findAllByUser(targetUser).stream().map(GetSubjectDtoMapper::toGetSubjectDto).toList();
+    }
+
+    void deleteSubject(String subjectId) {
+        Subject targetSubject = subjectRepository.findSubjectBySubjectId(subjectId).orElseThrow(
+                () -> new SubjectNotFoundException("Subject with ID " + subjectId + " not found.")
+        );
+        subjectRepository.delete(targetSubject);
+    }
+
+    @Transactional
+    GetSubjectDto updateSubject(UpdateSubjectDto updateSubjectDto) {
+        Subject targetSubject = subjectRepository.findSubjectBySubjectId(updateSubjectDto.subjectId()).orElseThrow(
+                () -> new SubjectNotFoundException("Subject with ID " + updateSubjectDto.subjectId() + " not found.")
+        );
+        targetSubject.setName(updateSubjectDto.subjectName());
+        Subject updatedSubject = subjectRepository.save(targetSubject);
+        return toGetSubjectDto(updatedSubject);
     }
 }

@@ -2,9 +2,11 @@ package com.ceniuch.bluediamondbackend.sessions;
 
 import com.ceniuch.bluediamondbackend.sessions.dtos.CreateSessionDto;
 import com.ceniuch.bluediamondbackend.sessions.dtos.GetSessionDto;
+import com.ceniuch.bluediamondbackend.sessions.dtos.UpdateSessionDtoId;
 import com.ceniuch.bluediamondbackend.sessions.mappers.GetSessionDtoMapper;
 import com.ceniuch.bluediamondbackend.subjects.Subject;
 import com.ceniuch.bluediamondbackend.subjects.SubjectRepository;
+import com.ceniuch.bluediamondbackend.subjects.dtos.GetSubjectDto;
 import com.ceniuch.bluediamondbackend.subjects.exceptions.SubjectNotFoundException;
 import com.ceniuch.bluediamondbackend.users.User;
 import com.ceniuch.bluediamondbackend.users.UserRepository;
@@ -49,5 +51,12 @@ public class SessionService {
                 .sorted(Comparator.reverseOrder())
                 .map(GetSessionDtoMapper::toGetSessionDto)
                 .toList();
+    }
+
+    void deleteSession(String sessionId) {
+        Session targetSession = sessionRepository.findBySessionId(sessionId).orElseThrow(
+                () -> new SubjectNotFoundException("Session with ID " + sessionId + " not found.")
+        );
+        sessionRepository.delete(targetSession);
     }
 }

@@ -2,6 +2,7 @@ package com.ceniuch.bluediamondbackend.subjects;
 
 import com.ceniuch.bluediamondbackend.subjects.dtos.CreateSubjectDto;
 import com.ceniuch.bluediamondbackend.subjects.dtos.GetSubjectDto;
+import com.ceniuch.bluediamondbackend.subjects.dtos.UpdateSubjectDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,27 @@ public class SubjectController {
     @ResponseStatus(HttpStatus.OK)
     List<GetSubjectDto> getAllSubjects(@RequestParam String userUid) {
         return subjectService.getAllUserSubjects(userUid);
+    }
+
+    @Operation(
+            summary = "Delete an existing subject." +
+            "The subject to be deleted is chosen by the provided id. " +
+            "If the subject doesn't exist, this operation will fail."
+    )
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteSubject(@PathVariable("id") String subjectId) {
+        subjectService.deleteSubject(subjectId);
+    }
+
+    @Operation(
+            summary = "Update an existing subject." +
+            "The subject to be updated is chosen by the provided id. " +
+            "If the subject doesn't exist, this operation will fail."
+    )
+    @PutMapping()
+    @ResponseStatus(HttpStatus.OK)
+    GetSubjectDto updateSubject(@RequestBody UpdateSubjectDto updateSubjectDto) {
+        return subjectService.updateSubject(updateSubjectDto);
     }
 }
