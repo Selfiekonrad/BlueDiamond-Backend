@@ -24,7 +24,9 @@ public class Subject {
     // TODO: orphanRemoval and CascadeType
     @OneToMany(
             mappedBy = "subject",
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private List<Session> sessions = new ArrayList<>();
 
