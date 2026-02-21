@@ -2,6 +2,7 @@ package com.ceniuch.bluediamondbackend.users;
 
 import com.ceniuch.bluediamondbackend.users.dtos.CreateUserDto;
 import com.ceniuch.bluediamondbackend.users.dtos.GetUserDto;
+import com.ceniuch.bluediamondbackend.users.exceptions.UserAlreadyExistsException;
 import com.ceniuch.bluediamondbackend.users.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 import static com.ceniuch.bluediamondbackend.users.mappers.CreateUserDtoMapper.fromCreateUserDto;
@@ -16,6 +17,10 @@ public class UserService {
     }
 
     GetUserDto createUser(CreateUserDto createUserDto) {
+        if (userRepository.existsUserByUID(createUserDto.UID())) {
+            throw new UserAlreadyExistsException("User mit UID existiert bereits");
+        }
+
         User newUser = fromCreateUserDto(createUserDto);
         User savedUser = userRepository.save(newUser);
         return toGetUserDtoId(savedUser);

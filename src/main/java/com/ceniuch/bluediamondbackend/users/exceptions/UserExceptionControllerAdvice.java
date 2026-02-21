@@ -17,4 +17,13 @@ public class UserExceptionControllerAdvice {
         );
         return new ResponseEntity<>(errorMessageModel, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    ResponseEntity<ErrorMessageModel> handleUserAlreadyExistsException(UserAlreadyExistsException exception) {
+        ErrorMessageModel errorMessageModel = new ErrorMessageModel(
+                HttpStatus.BAD_REQUEST.value(),
+                exception.getMessage()
+        );
+        return new ResponseEntity<>(errorMessageModel, HttpStatus.BAD_REQUEST);
+    }
 }
